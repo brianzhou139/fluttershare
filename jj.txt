@@ -1,0 +1,41 @@
+
+
+
+
+
+It is difficulty to validate the relationships between internal product attributes 
+and external attributes mainly because external attributes are measured with respect 
+to how the product relates to its environment  and additional factors besides the product itself.
+
+Internal product attributes like cyclomatic complexity may influence a 
+system's maintainability however other issues such as variable names, comments and 
+system documentation have a larger effect on the maintainability of the system.
+
+There are so many factors that influence the external attributes of a system.The skills of the 
+people doing the maintanance affects both the reliablity of the system and its maintainability.External product attributes can be measured directly only after the product has been created while 
+the internal product attributes are measurable during and after a product has been created.
+
+
+
+
+ 
+
+
+
+The basic difficulty arises because the external attributes such as maintainability are 
+not solely dependent on a small number of 
+internal product attributes; there are more factors that can affect this. 
+
+While the complexity of a system may influence the said system's maintainability,
+ other issues such as the choice of variable names, system documentation and, 
+particularly, the skills of the people doing the maintenance have such a large effect on the process that 
+they may underplay any maintainability differences arising from different levels of complexity in the system. 
+
+It is important to know that the submission above does not contradict experiments where a 
+relationship between maintainability and complexity is established – however, there 
+is not enough evidence at the moment to generalize this.
+
+Essentially, the relationship between internal product attributes such as cyclomatic complexity
+ and external attributes such as maintainability is one that is difficult to validate because 
+there are so many other factors (both tangible and non-tangible) that affect the relationship.
+

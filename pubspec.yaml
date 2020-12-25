@@ -36,6 +36,10 @@ dependencies:
   cached_network_image:
   flutter_svg:
   google_sign_in: ^4.0.1+1
+  firebase_core: ^0.5.3
+  cloud_firestore: ^0.14.4
+  firebase_storage: ^5.2.0
+  geolocator: 5.0.1
 
 dev_dependencies:
   flutter_test:

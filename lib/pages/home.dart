@@ -1,11 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttershare/models/user.dart';
 import 'package:fluttershare/pages/activity_feed.dart';
 import 'package:fluttershare/pages/profile.dart';
 import 'package:fluttershare/pages/search.dart';
 import 'package:fluttershare/pages/timeline.dart';
 import 'package:fluttershare/pages/upload.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+//firebase storage
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
+import 'create_account.dart';
 
 
 /***************************************************************************************************/
@@ -20,10 +28,17 @@ import 'package:google_sign_in/google_sign_in.dart';
 /*                                                                                                 */
 /*                                                                                                 */
 /***************************************************************************************************/
-
-
+User currentUser;
+FirebaseApp defaultApp;
+//FirebaseFirestore usersRef = FirebaseFirestore.instance;
+CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
+CollectionReference postsRef = FirebaseFirestore.instance.collection('posts');
 final GoogleSignIn googleSignIn=GoogleSignIn();
+final DateTime timestamp=DateTime.now();
 //final GoogleSignIn
+//Firebase Storage refs yeh
+firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
+firebase_storage.Reference storageRef = firebase_storage.FirebaseStorage.instance.ref();
 
 class Home extends StatefulWidget {
   @override
@@ -39,6 +54,7 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    test();
     //initialising page controller
     pageController=PageController();
 
@@ -46,6 +62,7 @@ class _HomeState extends State<Home> {
     googleSignIn.onCurrentUserChanged.listen((account) {
       //handle SignIn
       handleSignIn(account);
+      createUserInFireStore();
     },onError: (err){
       print('Error signing in : ${err}'); //display error to the console yeah ....
     });
@@ -60,6 +77,10 @@ class _HomeState extends State<Home> {
 
   }//end of initState
 
+  test() async {
+    defaultApp = await Firebase.initializeApp();
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -71,6 +92,7 @@ class _HomeState extends State<Home> {
     if(account!=null){
       print("User Signed In YEah");
       print("account data ${account}");
+      //createUserInFireStore();
       setState(() {
         isAuth=true;
       });
@@ -81,6 +103,40 @@ class _HomeState extends State<Home> {
     }
   }
 
+  createUserInFireStore() async {
+    //check if use exists in users collection
+    //if use doesn;t exists ..take them to account page...
+    final GoogleSignInAccount user=googleSignIn.currentUser;
+    DocumentSnapshot doc=await usersRef.doc(user.id).get();
+
+    //check if  doc exists
+    if(!doc.exists){
+
+      print("**********************************  createUserInfireStoreFired Now");
+      final username = await Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateAccount()));
+
+      print("I recevived the data from create_account");
+      print("FF ${username}");
+
+      //get username and create account yeah
+      usersRef.doc(user.id).set({
+        "id":user.id,
+        "username":username,
+        "photoUrl":user.photoUrl,
+        "email":user.email,
+        "displayName":user.displayName,
+        "bio":"",
+        "timestamp":timestamp
+      });
+
+      doc=await usersRef.doc(user.id).get();
+
+    }
+
+    currentUser=User.fromDocument(doc);
+    print("current User : ${currentUser.email}");
+
+  }
 
   login(){
     googleSignIn.signIn();
@@ -97,17 +153,19 @@ class _HomeState extends State<Home> {
   }
 
   onTapHere(int pageIndex){
-    pageController.jumpToPage(
+    pageController.animateToPage(
       pageIndex,
+      duration: Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
     );
   }
-  /*
-  Widget buildAuthScreen(){
+
+  Widget buildAuthScreen2(){
     return RaisedButton(
       child: Text('Logout'),
         onPressed: logout,
     );
-  }*/
+  }
 
   //If isAuth is true, the following function is fired
 
@@ -117,7 +175,7 @@ class _HomeState extends State<Home> {
         children: <Widget>[
           Timeline(),
           ActivityFeed(),
-          Upload(),
+          Upload(currentUser: currentUser,),
           Search(),
           Profile(),
         ],
@@ -165,7 +223,6 @@ class _HomeState extends State<Home> {
                 fontFamily: 'Signatra',
                 fontSize: 90.0,
                 color: Colors.white
-
               ),
             ),
             GestureDetector(
@@ -193,6 +250,5 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return isAuth ? buildAuthScreen() : buildUnAuthScreen();
   }
-
 
 }

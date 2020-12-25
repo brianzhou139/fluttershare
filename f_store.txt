@@ -1,0 +1,89 @@
+
+QUICKSORT(A, p, q − 1) 
+QUICKSORT(A, q + 1, r)
+
+
+Explain why it is difficult to validate the relationships between internal product attributes,
+such as cyclomatic complexity and external attributes, such as maintainability.
+
+DFF behavoui can be represented as 
+
+out(t)=out(t-1)
+
+DFF
+
+
+1. Give the HDL language ,is the following design valid 
+False
+
+2.The screen and keyboard chips should be part of the chip 
+Memory Chip
+
+
+1.Given the HDL language described in Appendix A, is the following design valid? 
+False
+
+2.The Screen and Keyboard chips should be part of the ... chip. 
+Memory
+
+3.Which part of the CPU is in charge of decoding the in structions 
+before they can be executed, and deciding which instruction to fetch and execute next? 
+Control unit
+
+4.A RAM device accepts the minimum following inputs: 
+Data input, an address input, and a load bit 
+
+5.What is the function of the following circuit? 
+DFF
+
+6.The statement foo[bar]=15 is conceptually the same as: 
+*(foo+bar)=15
+
+7.DFF behavior can be represented as: 
+out(t)=int(t-1)
+
+
+8.The von Neumann architecture is based on a: 
+
+
+9.Which part of the C-Instruction instructs the ALU what to compute? 
+comp
+
+10.True/False: The clock in a sequential logic circuit keeps track of hours, minutes, and seconds in the local timezone. 
+False
+
+11.16-bit / 64-register memory The program that translates from assembly to binary is called: 
+
+
+A counter is combinational logic, that simply adds a constant (typically 1) to a given number.
+
+
+A-instruction is used for: 
+
+Variable, arrays, and objects are stored in the computer's ... 
+Data memory
+
+
+Match each command (written in typical machine language syntax) to the memory access mode. 
+
+
+In our text the following is known as a: Dierent types of Registers: 
+
+In the DFF symbolic notation, the small triangle represents the : 
+clock
+
+The basic idea of the stored program concept is that the logic of the programs is embedded in the hardware. 
+Which of the following is NOT a component of the CPU? 
+(RAM)DDR4
+
+What is the mnemonic for an instruction that causes an unconditional branch to a new instruction? 
+jmp
+assembler
+
+
+12.When implementing the a 1-bit register, we need to tell the register when to store a new data and when
+ to keep storing its internal value. For that we need a
+Multiplexor
+multiplexer
+
+

@@ -33,6 +33,12 @@ FirebaseApp defaultApp;
 //FirebaseFirestore usersRef = FirebaseFirestore.instance;
 CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
 CollectionReference postsRef = FirebaseFirestore.instance.collection('posts');
+CollectionReference commentsRef = FirebaseFirestore.instance.collection('comments');
+CollectionReference acitivityFeedRef = FirebaseFirestore.instance.collection('feed');
+
+CollectionReference followersRef = FirebaseFirestore.instance.collection('followers');
+CollectionReference followingRef = FirebaseFirestore.instance.collection('following');
+
 final GoogleSignIn googleSignIn=GoogleSignIn();
 final DateTime timestamp=DateTime.now();
 //final GoogleSignIn
@@ -177,7 +183,7 @@ class _HomeState extends State<Home> {
           ActivityFeed(),
           Upload(currentUser: currentUser,),
           Search(),
-          Profile(),
+          Profile(profileId: currentUser?.id),
         ],
         controller: pageController,
         onPageChanged: onPageChangedHere,

@@ -1,7 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttershare/pages/home.dart';
 
 void main() {
+
+  //FirebaseFirestore.instance.settings(timestampsInSnapshotsEnabled: true).then((_){print("timestamps enabled");});
+  //FirebaseFirestore.instance.settings.sslEnabled.then((_){print("timestamps enabled");});
+  //FirebaseFirestore.instance.settings =Settings(sslEnabled: );
   runApp(MyApp());
 }
 

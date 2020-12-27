@@ -333,6 +333,6 @@ class _UploadState extends State<Upload> {
   @override
   Widget build(BuildContext context) {
     return _image==null ? buildSplashScreen():buildUploadForm();
-  }
+  }//end of build....
 
 }
